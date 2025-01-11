@@ -8,7 +8,6 @@ export default class Camera {
     this.size = this.experience.size;
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
-    // console.log(this.experience, this.size, this.scene, this.canvas);
 
     // set up two cameras
     this.createPerspectiveCamera();
@@ -23,6 +22,9 @@ export default class Camera {
       1000
     );
     this.scene.add(this.perspectiveCamera);
+
+    // set our camera position
+    this.perspectiveCamera.position.z = 5; // bigger value - farther away
   }
 
   createOrthographicCamera() {

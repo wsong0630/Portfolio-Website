@@ -1,14 +1,13 @@
 import * as THREE from 'three';
 import Experience from './Experience.js';
 
-export default class Camera {
+export default class Renderer {
   constructor() {
     // get size, scene from experience
     this.experience = new Experience();
     this.size = this.experience.size;
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
-    // console.log(this.experience, this.size, this.scene, this.canvas);
     this.camera = this.experience.camera;
     // console.log(this.camera, this.camera.perspectiveCamera);
     this.setRenderer();
@@ -46,6 +45,8 @@ export default class Camera {
     this.renderer.setSize(this.size.width, this.size.height);
     this.renderer.setPixelRatio(Math.min(this.size.pixelRatio, 2));
   }
+
+  // renderer function
   update() {
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
   }
