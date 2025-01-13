@@ -48,6 +48,25 @@ export default class Renderer {
 
   // renderer function
   update() {
+    // set the main viewport before render
+    this.renderer.setViewport(0, 0, this.size.width, this.size.height);
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
+    
+    // multi viewport
+    this.renderer.setScissorTest(true);
+    this.renderer.setViewport(
+      this.size.width - this.size.width / 3,
+      this.size.height - this.size.height / 3,
+      this.size.width / 3,
+      this.size.height / 3
+    );
+    this.renderer.setScissor(
+      this.size.width - this.size.width / 3,
+      this.size.height - this.size.height / 3,
+      this.size.width / 3,
+      this.size.height / 3
+    );
+    this.renderer.render(this.scene, this.camera.orthographicCamera);
+    this.renderer.setScissorTest(false);
   }
 }

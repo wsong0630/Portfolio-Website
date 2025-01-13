@@ -39,7 +39,7 @@ export default class Resources extends EventEmitter {
             this.loader.GLTFLoader.load(asset.path, (file) => {
                 this.singleAssetLoaded(asset, file);
             })
-        } else if (asset.type === 'webp') {
+        } else if (asset.type === 'mp4') {
             this.screen = {}; // -> html
             this.screenTexture = {}; // -> three.js config
 
@@ -53,7 +53,7 @@ export default class Resources extends EventEmitter {
             this.screen[asset.name].play(); // !!!!!!!!!!!!!!
 
             // SCREEN TEXTURE
-            this.screenTexture[asset.name] = new THREE.VideoTexture( this.screen );
+            this.screenTexture[asset.name] = new THREE.VideoTexture( this.screen[asset.name] ); // ? select correct div element
             this.screenTexture[asset.name].flipY = true;
             this.screenTexture[asset.name].minFilter = THREE.NearestFilter;
             this.screenTexture[asset.name].magFilter = THREE.NearestFilter;

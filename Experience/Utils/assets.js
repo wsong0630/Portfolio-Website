@@ -7,7 +7,7 @@ export default [
     },
     {
         name: 'screen',
-        type: 'webp',
-        path: '/textures/coding-skills-loading-dk68v8z0hevjpuiv.webp', // loader need path when loading model
+        type: 'mp4',
+        path: '/textures/screen.mp4', // loader need path when loading model
     }
 ]

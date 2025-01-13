@@ -45,10 +45,12 @@ export default class Experience {
   // if the renderer is working, the browser should display black bg
   resize() {
     this.camera.resize();
+    this.world.resize();
     this.renderer.resize();
   }
   update() {
     this.camera.update();
+    this.world.update();
     this.renderer.update();
   }
 }

@@ -27,23 +27,34 @@ export default class Camera {
     this.scene.add(this.perspectiveCamera);
 
     // set our camera position
-    this.perspectiveCamera.position.z = 5; // bigger value - farther away
+    this.perspectiveCamera.position.x = 0;
+    this.perspectiveCamera.position.y = 8;
+    this.perspectiveCamera.position.z = 30; // bigger value - farther away
   }
 
   createOrthographicCamera() {
-    // camera frustum plane
-    this.frustum = 5;
-    this.orthographicCamera = new THREE.OrthographicCamera(
-      // frustum's width should account for both the aspectRatio (to fit the screen shape) and frustum (to control the zoom)
-      // frustum is centered around the origin (0,0), so you divide by 2 to get symmetric boundaries
-      (-this.size.aspectRatio * this.size.frustum) / 2, // ? frustum need to be also in Size.js?
-      (this.size.aspectRatio * this.size.frustum) / 2,
-      this.size.frustum / 2,
-      -this.size.frustum / 2,
-      -100,
-      100
+    // this.orthographicCamera = new THREE.OrthographicCamera(
+    //   // frustum's width should account for both the aspectRatio (to fit the screen shape) and frustum (to control the zoom)
+    //   // frustum is centered around the origin (0,0), so you divide by 2 to get symmetric boundaries
+    //   (-this.size.aspectRatio * this.size.frustum) / 2,
+    //   (this.size.aspectRatio * this.size.frustum) / 2,
+    //   this.size.frustum / 2,
+    //   -this.size.frustum / 2,
+    //   -10,
+    //   10
+    // );
+    this.orthographicCamera = new THREE.PerspectiveCamera(
+      50,
+      this.size.aspectRatio,
+      0.1,
+      1000
     );
+
     this.scene.add(this.orthographicCamera);
+
+    // * CAMERA HELPER - orth camera
+    this.helper = new THREE.CameraHelper(this.orthographicCamera);
+    this.scene.add(this.helper);
 
     // GRID HELPER
     const size = 10;
@@ -58,7 +69,8 @@ export default class Camera {
   setOrbitControls() {
     this.controls = new OrbitControls(this.perspectiveCamera, this.canvas);
     this.controls.enableDamping = true;
-    this.controls.enableZoom = true;
+    // disable zoom in and out as triggering wheel event
+    this.controls.enableZoom = false;
   }
 
   resize() {
@@ -77,6 +89,12 @@ export default class Camera {
   }
 
   update() {
+    // console.log(this.perspectiveCamera.position)
     this.controls.update();
+
+    this.helper.matrixWorldNeedsUpdate = true;
+    this.helper.update();
+    this.helper.position.copy(this.orthographicCamera.position);
+    this.helper.rotation.copy(this.orthographicCamera.rotation);
   }
 }
