@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import gsap from 'gsap';
 import Experience from '../Experience.js';
 
 export default class Room {
@@ -13,8 +14,16 @@ export default class Room {
     this.actualRoom = this.room.scene;
     console.log(this.actualRoom); // blender objects are under children properties
 
+    // LINEAR INTERPOLATION
+    this.linear = {
+      current: 0, // start
+      target: 0, // end
+      ease: 0.1, // progress value: smoothness
+    };
+
     this.setModel();
     this.setAnimation();
+    this.onMouseMove();
 
     // const geometry = new THREE.BoxGeometry(1, 1, 1);
     // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -59,7 +68,24 @@ export default class Room {
 
   setAnimation() {}
 
+  // * ROTATE THE ROOM WITH CURSOR MOVING LEFT TO RIGHT
+  onMouseMove() {
+    window.addEventListener('mousemove', (e) => {
+      this.rotation =
+        ((e.clientX - window.innerWidth / 2) * 2) / window.innerWidth; // 0 to 1
+      // console.log(e.clientX, this.rotation);
+      this.linear.target = this.rotation * 0.5; // decrease multiplied number to get less rotatable angle
+    });
+  }
+
   resize() {}
 
-  update() {}
+  update() {
+    this.linear.current = gsap.utils.interpolate(
+      this.linear.current,
+      this.linear.target,
+      this.linear.ease
+    );
+    this.actualRoom.rotation.y = this.linear.current;
+  }
 }
