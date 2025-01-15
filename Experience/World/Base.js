@@ -13,7 +13,7 @@ export default class Base {
     this.geometry = new THREE.PlaneGeometry(100, 100);
     // ! do not use MeshBasicMaterial which could not produce light effects
     this.material = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
+      color: 0xf0fee0,
       //   side: THREE.BackSide, // or THREE.DoubleSide
     });
     this.plane = new THREE.Mesh(this.geometry, this.material);

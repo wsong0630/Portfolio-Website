@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,11 +6,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
+
+  <!-- NAVIGATION BAR -->
+  <header class="header">
+    <nav class="nav-header">
+      <div class="nav-menu">
+        <ul class="nav_list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link">Home </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#about" class="nav-link">About </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#work" class="nav-link">Work </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
   <body>
     <div class="experience">
       <!-- the canvas element has to match styling class name -->
       <canvas class="experience-canvas"></canvas>
     </div>
+
+    <!-- HOME PAGE COMPONENTS -->
+    <div class="page">
+      <div class="page-wrapper">
+        <section class="person">
+          <div class="person-wrapper">
+            <div class="person-main">
+              <h1 class="person-main-title">WenJun Song</h1>
+              <p class="person-main-description">CodeSmith Student</p>
+            </div>
+
+            <div class="person-second">
+              <!-- <h1 class="person-second-subheading">Portfolio</h1> -->
+              <p class="person-second-subheading">
+                This is my portfolio, keep scrolling...
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION PAGE - LEFT-->
+
+        <div class="section-margin"></div>
+        <section class="first-section section left">
+          <!-- SECTION WRAPPER -->
+          <div class="section-intro-wrapper">
+            <h1 class="section-title">
+              <div class="section-title-dec dec1"></div>
+              <div class="section-title-dec dec2"></div>
+              <div class="section-title-dec dec3"></div>
+            </h1>
+            <span class="section-number">01</span>
+          </div>
+
+          <!-- SECTION WRAPPER -->
+          <div class="section-detail-wrapper">
+            <h3 class="section-heading">Lorem Ipsum</h3>
+            <p class="section-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Blanditiis tempore rem delectus, excepturi esse voluptatem
+              explicabo quas dolore quo officiis distinctio debitis placeat,
+              maxime, laborum enim nobis in impedit optio.
+            </p>
+          </div>
+        </section>
+        <div class="section-margin"></div>
+
+        <!-- SECTION PAGE - RIGHT-->
+
+        <div class="section-margin"></div>
+        <section class="first-section section left">
+          <!-- SECTION WRAPPER -->
+          <div class="section-intro-wrapper">
+            <h1 class="section-title">
+              <div class="section-title-dec dec1"></div>
+              <div class="section-title-dec dec2"></div>
+              <div class="section-title-dec dec3"></div>
+            </h1>
+            <span class="section-number">01</span>
+          </div>
+
+          <!-- SECTION WRAPPER -->
+          <div class="section-detail-wrapper">
+            <h3 class="section-heading">Lorem Ipsum</h3>
+            <p class="section-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Blanditiis tempore rem delectus, excepturi esse voluptatem
+              explicabo quas dolore quo officiis distinctio debitis placeat,
+              maxime, laborum enim nobis in impedit optio.
+            </p>
+          </div>
+        </section>
+        <div class="section-margin"></div>
+
+      </div>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

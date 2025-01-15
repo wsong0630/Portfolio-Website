@@ -66,7 +66,7 @@ export default class Renderer {
       this.size.width / 3,
       this.size.height / 3
     );
-    this.renderer.render(this.scene, this.camera.perspectiveCamera);
+    // this.renderer.render(this.scene, this.camera.perspectiveCamera);
     this.renderer.setScissorTest(false);
   }
 }

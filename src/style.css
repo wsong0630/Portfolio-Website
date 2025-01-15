@@ -1,16 +1,118 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Delius&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+* {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
-.experience{
+html,
+body {
+  font-family: 'Roboto Flex', sans-serif;
+}
+
+/* NAVIGATION BAR -------------------------------------------- */
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header {
+  background-color: #acb5aa;
+  padding: 10px 20px;
+  z-index: 999;
+  position: fixed;
+  width:100%;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.nav_list {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none; /* Remove underline from links */
+  color: #303030;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: #b4712e;
+}
+
+/* EXPERIENCE -------------------------------------------- */
+
+.experience {
   position: fixed;
   width: 100vw;
   height: 100vh;
 }
 
-.experience-canvas{
+.experience-canvas {
   width: 100%;
   height: 100%;
+}
+
+/* PAGE -------------------------------------------- */
+.page {
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page-wrapper {
+  position: relative;
+}
+
+/* PERSON-SECTION -------------------------------------------- */
+.person {
+  width: 100vw;
+  height: 100vh;
+  color: #303030;
+}
+
+.person-wrapper {
+  position: relative;
+  height: 100%;
+  width: calc(100% - 200px);
+  margin: 0 auto;
+  max-width: 3280px;
+}
+
+.person-main {
+  position: absolute;
+  bottom: 100px;
+}
+
+.person-second {
+  position: absolute;
+  /* top: calc(50% - 200px); */
+  right: 0;
+  bottom: 100px;
+}
+
+.person-main-title {
+  font-size: 42px;
+}
+
+.person-main-description {
+  font-size: 16px;
+}
+
+.person-second-subheading {
+  font-size: 16px;
+  /* text-transform: uppercase; */
 }
