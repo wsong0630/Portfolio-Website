@@ -12,7 +12,7 @@ export default class Room {
     this.time = this.experience.times;
     this.room = this.resources.items.room; // -> item-file pairs;
     this.actualRoom = this.room.scene;
-    console.log(this.actualRoom); // blender objects are under children properties
+    // console.log(this.actualRoom); // blender objects are under children properties
 
     // LINEAR INTERPOLATION
     this.linear = {

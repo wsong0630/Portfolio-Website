@@ -22,14 +22,14 @@ export default class Camera {
       35,
       this.size.aspectRatio,
       0.1,
-      1000
+      500
     );
     this.scene.add(this.perspectiveCamera);
 
     // set our camera position
     this.perspectiveCamera.position.x = 10;
-    this.perspectiveCamera.position.y = 20;
-    this.perspectiveCamera.position.z = 10; // bigger value - farther away
+    this.perspectiveCamera.position.y = 10;
+    this.perspectiveCamera.position.z = 1; // bigger value - farther away
   }
 
   createOrthographicCamera() {
