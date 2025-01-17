@@ -100,10 +100,14 @@ ul {
 
 .left {
   margin-right: auto;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
 }
 
 .right {
   margin-left: auto;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
 }
 
 .section-intro-wrapper {
@@ -246,5 +250,12 @@ ul {
   }
   50% {
     border-color: #333;
+  }
+}
+
+/* media queries */
+@media (max-width: 968px) {
+  .section {
+    width: 100%;
   }
 }

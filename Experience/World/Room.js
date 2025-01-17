@@ -59,6 +59,19 @@ export default class Room {
         //     child.material.transmission = 1;
         //     child.material.opacity = 1;
       }
+
+      // * MODEL INTRO ANIMATION - all function
+      // pop-up animation
+      if (child.name === 'floor') {
+        console.log(child)
+        // child.position.x = -2.5;
+        child.position.z = -2.5;
+      }
+
+      // scale-up animation
+      if (child.name === 'bed_frame' | child.name === 'floor001') {
+        child.scale.set(0,0,0)
+      }
     });
 
     this.scene.add(this.actualRoom);
