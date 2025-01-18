@@ -87,13 +87,13 @@ export default class Controls {
           scrollTrigger: {
             trigger: '.third-move',
             start: 'top top',
-            end: 'bottom 5%',
+            end: 'bottom bottom',
             scrub: 0.7,
             invalidateOnRefresh: true,
           },
         }).to(this.camera.orthographicCamera.position, {
           x: 7,
-          y: 22,
+          y: 21,
           z: 8,
         });
       },

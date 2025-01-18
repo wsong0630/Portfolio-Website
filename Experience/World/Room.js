@@ -10,6 +10,7 @@ export default class Room {
 
     this.resources = this.experience.resources;
     this.time = this.experience.times;
+    this.camera = this.experience.camera;
     this.room = this.resources.items.room; // -> item-file pairs;
     this.actualRoom = this.room.scene;
     // console.log(this.actualRoom); // blender objects are under children properties
@@ -24,7 +25,10 @@ export default class Room {
     this.setModel();
     this.setAnimation();
     this.onMouseMove();
+    this.onClick();
 
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2();
     // const geometry = new THREE.BoxGeometry(1, 1, 1);
     // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     // const cube = new THREE.Mesh(geometry, material);
@@ -47,6 +51,7 @@ export default class Room {
           }
         });
       }
+
       // find my screen
       if (child.name === 'Screen') {
         child.material = new THREE.MeshBasicMaterial({
@@ -60,17 +65,25 @@ export default class Room {
         //     child.material.opacity = 1;
       }
 
+      // find 'click on' wall picture
+      if (child.name === 'clickon') {
+        console.log(child.name);
+        child.material = new THREE.MeshBasicMaterial({
+          map: this.resources.items.clickme,
+        });
+      }
+
       // * MODEL INTRO ANIMATION - all function
       // pop-up animation
       if (child.name === 'floor') {
-        console.log(child)
+        console.log(child);
         // child.position.x = -2.5;
         child.position.z = -2.5;
       }
 
       // scale-up animation
-      if (child.name === 'bed_frame' | child.name === 'floor001') {
-        child.scale.set(0,0,0)
+      if ((child.name === 'bed_frame') | (child.name === 'floor001')) {
+        child.scale.set(0, 0, 0);
       }
     });
 
@@ -91,6 +104,33 @@ export default class Room {
     });
   }
 
+  // * CLICK TRIGGER ON WALL PICTURE
+  onClick() {
+    window.addEventListener('click', (event) => {
+      // Convert mouse position to normalized device coordinates
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      // Update the raycaster with the camera and mouse position
+      this.raycaster.setFromCamera(this.mouse, this.camera.orthographicCamera);
+
+      // Find intersected objects
+      this.intersects = this.raycaster.intersectObjects(
+        this.scene.children,
+        true
+      );
+      console.log(this.intersects);
+      // Check if the clicked object is the wall
+      this.intersects.forEach((intersect) => {
+        if (intersect.object.name === 'walls') {
+          console.log('wall clicked!');
+          const pdfPath = 'public/doc/Arch Portfolio.pdf';
+          console.log(pdfPath);
+          window.open(pdfPath, '_blank');
+        }
+      });
+    });
+  }
   resize() {}
 
   update() {

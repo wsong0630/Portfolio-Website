@@ -26,6 +26,7 @@ export default class Resources extends EventEmitter {
     this.loader = {};
     this.loader.GLTFLoader = new GLTFLoader();
     this.loader.DRACOLoader = new DRACOLoader();
+    this.loader.TextureLoader = new THREE.TextureLoader();
 
     // we use draco compression to export blender model
     this.loader.DRACOLoader.setDecoderPath('/draco/');
@@ -34,34 +35,42 @@ export default class Resources extends EventEmitter {
 
   startLoading() {
     for (const asset of this.assets) {
-        if (asset.type === 'glbModel') {
-            // loader function
-            this.loader.GLTFLoader.load(asset.path, (file) => {
-                this.singleAssetLoaded(asset, file);
-            })
-        } else if (asset.type === 'mp4') {
-            this.screen = {}; // -> html
-            this.screenTexture = {}; // -> three.js config
+      if (asset.type === 'glbModel') {
+        // loader function
+        this.loader.GLTFLoader.load(asset.path, (file) => {
+          this.singleAssetLoaded(asset, file);
+        });
+      } else if (asset.type === 'mp4') {
+        this.screen = {}; // -> html
+        this.screenTexture = {}; // -> three.js config
 
-            // SCREEN div element: create the html element
-            this.screen[asset.name] = document.createElement('video'); // 'video' is standard html element
-            this.screen[asset.name].src = asset.path;
-            this.screen[asset.name].muted = true;
-            this.screen[asset.name].playInline = true;
-            this.screen[asset.name].autoplay = true;
-            this.screen[asset.name].loop = true;
-            this.screen[asset.name].play(); // !!!!!!!!!!!!!!
+        // SCREEN div element: create the html element
+        this.screen[asset.name] = document.createElement('video'); // 'video' is standard html element
+        this.screen[asset.name].src = asset.path;
+        this.screen[asset.name].muted = true;
+        this.screen[asset.name].playInline = true;
+        this.screen[asset.name].autoplay = true;
+        this.screen[asset.name].loop = true;
+        this.screen[asset.name].play(); // !!!!!!!!!!!!!!
 
-            // SCREEN TEXTURE
-            this.screenTexture[asset.name] = new THREE.VideoTexture( this.screen[asset.name] ); // ? select correct div element
-            this.screenTexture[asset.name].flipY = true;
-            this.screenTexture[asset.name].minFilter = THREE.NearestFilter;
-            this.screenTexture[asset.name].magFilter = THREE.NearestFilter;
-            this.screenTexture[asset.name].generateMipMaps = false;
-            this.screenTexture[asset.name].encoding = THREE.sRGBEncoding;
+        // SCREEN TEXTURE
+        this.screenTexture[asset.name] = new THREE.VideoTexture(
+          this.screen[asset.name]
+        ); // ? select correct div element
+        this.screenTexture[asset.name].flipY = true;
+        this.screenTexture[asset.name].minFilter = THREE.NearestFilter;
+        this.screenTexture[asset.name].magFilter = THREE.NearestFilter;
+        this.screenTexture[asset.name].generateMipMaps = false;
+        this.screenTexture[asset.name].encoding = THREE.sRGBEncoding;
 
-            this.singleAssetLoaded(asset, this.screenTexture[asset.name]); 
-        }
+        this.singleAssetLoaded(asset, this.screenTexture[asset.name]);
+      } else if (asset.type === 'jpg') {
+        this.loader.TextureLoader.load(asset.path, (texture) => {
+          texture.flipY = false; // Set flipY if needed based on texture mapping
+          texture.encoding = THREE.sRGBEncoding; // Correct color space
+          this.singleAssetLoaded(asset, texture);
+        });
+      }
     }
   }
   singleAssetLoaded(asset, file) {
@@ -71,7 +80,7 @@ export default class Resources extends EventEmitter {
 
     // check if all assets are loaded
     if (this.loaded === this.queue) {
-         this.emit('ready');
+      this.emit('ready');
     }
   }
 }
