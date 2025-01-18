@@ -122,10 +122,10 @@ export default class Room {
       console.log(this.intersects);
       // Check if the clicked object is the wall
       this.intersects.forEach((intersect) => {
-        if (intersect.object.name === 'walls') {
+        if (intersect.object.name === 'clickon') {
           console.log('wall clicked!');
           const pdfPath = 'public/doc/Arch Portfolio.pdf';
-          console.log(pdfPath);
+          // intersect.object.material.color.set(0xffff00); // Highlight color
           window.open(pdfPath, '_blank');
         }
       });

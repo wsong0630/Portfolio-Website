@@ -22,6 +22,7 @@ export default class Times extends EventEmitter {
 
     // ? we only request frame in Times class -> npm-events
     window.requestAnimationFrame(this.update.bind(this));
+
     // window.requestAnimationFrame(() => this.update); // keep it in the same context
   }
 }

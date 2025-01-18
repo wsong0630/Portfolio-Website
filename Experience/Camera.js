@@ -70,7 +70,7 @@ export default class Camera {
     this.controls = new OrbitControls(this.perspectiveCamera, this.canvas);
     this.controls.enableDamping = true;
     // disable zoom in and out as triggering wheel event
-    this.controls.enableZoom = false;
+    this.controls.enableZoom = true;
   }
 
   resize() {
