@@ -124,7 +124,7 @@ export default class Room {
       this.intersects.forEach((intersect) => {
         if (intersect.object.name === 'clickon') {
           console.log('wall clicked!');
-          const pdfPath = 'public/doc/Arch Portfolio.pdf';
+          const pdfPath = '/doc/Arch-Portfolio.pdf';
           // intersect.object.material.color.set(0xffff00); // Highlight color
           window.open(pdfPath, '_blank');
         }
