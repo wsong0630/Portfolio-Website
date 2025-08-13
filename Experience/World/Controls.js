@@ -55,7 +55,7 @@ export default class Controls {
             trigger: '.second-move',
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 0.7,
+            scrub: 0.9,
             invalidateOnRefresh: true,
           },
         })
